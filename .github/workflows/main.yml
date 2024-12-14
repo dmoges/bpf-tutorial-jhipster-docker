@@ -53,7 +53,7 @@ jobs:
 
 
       - name: Build the stack
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: 'E2E: Package'
         run: npm run ci:e2e:package
