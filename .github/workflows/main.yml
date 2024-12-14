@@ -52,8 +52,8 @@ jobs:
           ./mvnw -ntp jib:build -Djib.to.image=jhipsterOnlineshopReact${DOCKER_TAG} -Djib.to.auth.username="${{ secrets.DOCKER_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKER_PASSWORD }}" -Pprod
 
 
-      - name: Build the stack
-        run: docker compose up -d
+      #- name: Build the stack
+      #  run: docker compose up -d
 
      # - name: 'E2E: Package'
      #   run: npm run ci:e2e:package
