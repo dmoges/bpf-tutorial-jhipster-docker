@@ -4,6 +4,10 @@ jobs:
   pipeline:
     name: my_simple_shop pipeline
     runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:20.10.9
+        options: --privileged
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
     timeout-minutes: 40
     env:
