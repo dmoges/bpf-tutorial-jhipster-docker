@@ -1,12 +1,19 @@
 {
-  "name": "ShoppingOrder",
+  "annotations": {
+    "changelogDate": "20210615120530"
+  },
+  "applications": ["my_simple_shop"],
+  "changelogDate": "20210615120530",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "shopping_order",
   "fields": [
     {
       "fieldName": "name",
       "fieldType": "String",
       "fieldValidateRules": ["required", "unique", "minlength", "maxlength"],
-      "fieldValidateRulesMinlength": "2",
-      "fieldValidateRulesMaxlength": "90"
+      "fieldValidateRulesMaxlength": "90",
+      "fieldValidateRulesMinlength": "2"
     },
     {
       "fieldName": "totalAmount",
@@ -19,38 +26,37 @@
       "fieldType": "LocalDate"
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ShoppingOrder",
+  "pagination": "no",
+  "readOnly": false,
   "relationships": [
     {
-      "relationshipType": "one-to-many",
       "otherEntityName": "productOrder",
       "otherEntityRelationshipName": "overallOrder",
-      "relationshipName": "orders"
+      "relationshipName": "orders",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
     },
     {
-      "relationshipType": "many-to-one",
+      "otherEntityField": "login",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "shoppingOrder",
-      "relationshipValidateRules": "required",
       "relationshipName": "buyer",
-      "otherEntityField": "login"
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     },
     {
-      "relationshipType": "one-to-one",
+      "otherEntityField": "shippedAt",
       "otherEntityName": "shipment",
       "otherEntityRelationshipName": "order",
+      "ownerSide": false,
       "relationshipName": "shipment",
-      "otherEntityField": "shippedAt",
-      "ownerSide": false
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
     }
   ],
-  "entityTableName": "shopping_order",
-  "dto": "mapstruct",
-  "pagination": "no",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": ["my_simple_shop"],
-  "changelogDate": "20210615120530"
+  "service": "serviceImpl"
 }

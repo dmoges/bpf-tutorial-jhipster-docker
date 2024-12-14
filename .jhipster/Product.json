@@ -1,12 +1,19 @@
 {
-  "name": "Product",
+  "annotations": {
+    "changelogDate": "20210615120330"
+  },
+  "applications": ["my_simple_shop"],
+  "changelogDate": "20210615120330",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "product",
   "fields": [
     {
       "fieldName": "name",
       "fieldType": "String",
       "fieldValidateRules": ["required", "unique", "minlength", "maxlength"],
-      "fieldValidateRulesMinlength": "2",
-      "fieldValidateRulesMaxlength": "90"
+      "fieldValidateRulesMaxlength": "90",
+      "fieldValidateRulesMinlength": "2"
     },
     {
       "fieldName": "price",
@@ -16,8 +23,7 @@
     },
     {
       "fieldName": "description",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "text",
+      "fieldType": "TextBlob",
       "fieldValidateRules": ["required"]
     },
     {
@@ -43,22 +49,19 @@
       "fieldValidateRulesMin": "0"
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Product",
+  "pagination": "no",
+  "readOnly": false,
   "relationships": [
     {
-      "relationshipType": "one-to-many",
       "otherEntityName": "productOrder",
       "otherEntityRelationshipName": "product",
-      "relationshipName": "productOrder"
+      "relationshipName": "productOrder",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
     }
   ],
-  "entityTableName": "product",
-  "dto": "mapstruct",
-  "pagination": "no",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": ["my_simple_shop"],
-  "changelogDate": "20210615120330"
+  "service": "serviceImpl"
 }

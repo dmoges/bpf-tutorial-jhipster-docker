@@ -1,5 +1,12 @@
 {
-  "name": "Shipment",
+  "annotations": {
+    "changelogDate": "20210615120730"
+  },
+  "applications": ["my_simple_shop"],
+  "changelogDate": "20210615120730",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "shipment",
   "fields": [
     {
       "fieldName": "shippedAt",
@@ -7,33 +14,31 @@
       "fieldValidateRules": ["required"]
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Shipment",
+  "pagination": "no",
+  "readOnly": false,
   "relationships": [
     {
-      "relationshipType": "one-to-one",
+      "otherEntityField": "name",
       "otherEntityName": "shoppingOrder",
       "otherEntityRelationshipName": "shipment",
-      "relationshipValidateRules": "required",
+      "ownerSide": true,
       "relationshipName": "order",
-      "otherEntityField": "name",
-      "ownerSide": true
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
     },
     {
-      "relationshipType": "many-to-one",
+      "otherEntityField": "login",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "shipment",
-      "relationshipValidateRules": "required",
       "relationshipName": "shippedBy",
-      "otherEntityField": "login"
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     }
   ],
-  "entityTableName": "shipment",
-  "dto": "mapstruct",
-  "pagination": "no",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": ["my_simple_shop"],
-  "changelogDate": "20210615120730"
+  "service": "serviceImpl"
 }
