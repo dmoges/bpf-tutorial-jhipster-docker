@@ -28,8 +28,7 @@
     },
     {
       "fieldName": "picture",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "image",
+      "fieldType": "ImageBlob",
       "fieldValidateRules": ["required"]
     },
     {
