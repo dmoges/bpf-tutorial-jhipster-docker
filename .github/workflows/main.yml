@@ -38,7 +38,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           if [ ! -z "$SONAR_TOKEN" ]; then
-              ./mvnw -ntp initialize sonar:sonar -Dsonar.host.url=https://967e-77-181-83-158.ngrok-free.app -Dsonar.projectKey=sonar-bpf-jhipster
+              ./mvnw -ntp initialize sonar:sonar -Dsonar.host.url=https://797f-77-187-164-202.ngrok-free.app -Dsonar.projectKey=sonar-bpf-jhipster
           else
               echo No SONAR_TOKEN, skipping...
           fi
