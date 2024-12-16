@@ -32,16 +32,34 @@ jobs:
           npm run ci:backend:test
       #- name: Run frontend test
       #  run: npm run ci:frontend:test
-      - name: Analyze code with SonarQube
+      # sonarqube workflow
+      - name: Cache SoanrQube packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Build and analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          if [ ! -z "$SONAR_TOKEN" ]; then
-              ./mvnw -ntp initialize sonar:sonar -Dsonar.host.url=https://797f-77-187-164-202.ngrok-free.app
-          else
-              echo No SONAR_TOKEN, skipping...
-          fi
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+      #- name: Analyze code with SonarQube
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #  run: |
+      #    if [ ! -z "$SONAR_TOKEN" ]; then
+      #        ./mvnw -ntp initialize sonar:sonar -Dsonar.host.url=https://797f-77-187-164-202.ngrok-free.app
+      #    else
+      #        echo No SONAR_TOKEN, skipping...
+      #    fi
       - name: Package application
         run: npm run java:jar:prod
       - name: Build and publish docker image
